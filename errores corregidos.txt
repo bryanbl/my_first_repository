@@ -1,0 +1,108 @@
+#include <iostream>
+#include <math.h>
+
+using namespace std;
+
+//#define alpha 1.24
+float ALPHA = 1.24;
+float x, y, vx, vy;
+
+
+void calcParabolico(void);
+void print_results(void);
+void lib_func1(void);
+
+int main()
+{
+    unsigned int var;
+    unsigned short int des = 5;
+    lib_func1();
+    var = 100;
+
+    var += des;
+
+    //Calculando los parametros en la Tierra con g = 9.8 m/s*s
+    calcParabolico();
+    print_results();
+
+    //Calculando los parametros en la Luna con g = 1.62 m/s*s
+    calcParabolico();
+    print_results();
+
+
+    return 0;
+}
+
+void calcParabolico(void)
+{
+    const float g = 9.8;
+    float vx0, vy0, y0, v0, t;
+
+    vx0 = v0 * cos(ALPHA);
+    vy0 = v0 * sin(ALPHA);
+
+    vx = vx0;
+    vy = vy0-g*t;
+
+    x = vx*t;
+    y = y0+vy0*t-(g*pow(t,2)/2);
+}
+
+void print_results(void)
+{
+    cout<<"Los resultados del calculo parabolico son: "<<std::endl;
+    cout<<"Velocidad en x: "<<vx<<", ";
+    cout<<"Velocidad en y: "<<vy<<", ";
+    cout<<"Posicion en x: "<<x<<", ";
+    cout<<"Posicion en y: "<<y<<std::endl;
+}
+
+void lib_func1(void){
+    
+}
+
+void otros_calculos(void)
+{
+    //Definicion de variables para las formulas
+    
+    float total, serie_simple, radio, vol, raiz1, raiz2, fi, wi, Z0, R, wL,G,wC;
+    float a, b, c, w, f, B1, betacero, mu, epsi;
+    const float pi = 3.14;
+    //inicializacion de variables
+    
+    total = 0;
+    radio = 20.45;
+    mu = 0.00000125664;
+    epsi = 0.00000000000088542;
+    
+    /* Serie simple (1/[(x^2) + (x+1)]) para x entre 1 y 199*/
+    for(int x=1; x<200; x++){
+        
+        serie_simple =  (1/(pow(x,2) + (x+1)));
+        total = total + serie_simple;
+    }
+    
+
+    /* Volumen de la esfera */
+    vol=(4/3)*pi*(pow(radio,3));
+
+    /* Raices de la ecuacion (3*x^2) + (5*x) + 8  = 0 */
+      raiz1= (-5 + (sqrt(pow(5,2) -4*3*8)))/(2*3);
+      raiz2= (-5 - (sqrt(pow(5,2) -4*3*8)))/(2*3);
+      
+
+     //Impedancia tipica de una linea de transmision
+      
+      fi = 10000000;
+      wi = 2*pi*fi;  
+      Z0 = pow(((R+wL)/(G+wC)),(1/2));
+    
+
+    // Constante de fase de una fibra optica
+      
+      f = 5000000;
+      w = 2*pi*f; 
+      betacero = w*(pow((mu*epsi),(1/2))); 
+      B1 = (pow(((pow(a,2)-pow(b,2))*c+pow(b,2)),(1/2)))*betacero;
+
+}
